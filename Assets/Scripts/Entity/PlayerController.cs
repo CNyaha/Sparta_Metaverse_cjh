@@ -6,11 +6,13 @@ public class PlayerController : BaseController
 {
     // 카메라
     private Camera mainCamera;
+    JumpController jumpController;
 
     protected override void Awake()
     {
         base.Awake();
         mainCamera = Camera.main;
+        jumpController = GetComponent<JumpController>();
     }
 
     protected override void HandleAction()
@@ -34,22 +36,19 @@ public class PlayerController : BaseController
 
     }
 
+
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (Input.GetKeyDown(KeyCode.Space))
+            jumpController.Jump();
+    }
+
     protected override void OnInteract()
     {
         Debug.Log("플레이어 상호작용!");
     }
 
-    protected override void Update()
-    {
-        base.Update();
-
-        if (mainCamera != null)
-        {
-            Vector3 cameraPos = transform.position;
-            cameraPos.z = mainCamera.transform.position.z;
-            mainCamera.transform.position = cameraPos;
-        }
-
-    }
 
 }

@@ -20,7 +20,9 @@ public class BaseController : MonoBehaviour
 
     // 바라보는 방향
     protected Vector2 lookDirection = Vector2.zero;
-    public Vector2 LookDirection {  get => lookDirection; } 
+    public Vector2 LookDirection {  get => lookDirection; }
+
+    protected JumpController jumpController;
 
     
     protected virtual void Awake()
@@ -28,6 +30,7 @@ public class BaseController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animation>();
         statHandler = GetComponent<StatHandler>();
+        jumpController = GetComponent<JumpController>();
 
         
     }
@@ -41,9 +44,11 @@ public class BaseController : MonoBehaviour
     {
         HandleAction();
         Rotate(lookDirection);
-        HandleJump();
         HandleInteraction();
         HandleEventTrigger();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            jumpController.Jump();
     }
 
     protected virtual void FixedUpdate()
@@ -73,27 +78,12 @@ public class BaseController : MonoBehaviour
 
         if (weaponPivot != null)
         {
-            weaponPivot.rotation = Quaternion.Euler(0, 9, rotZ);
+            weaponPivot.rotation = Quaternion.Euler(0f, 0f, rotZ);
         }
         
 
     }
 
-    // 바닥을 밟고있는지 확인
-    protected virtual bool isGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f);
-        return hit.collider != null;
-    }
-
-    protected virtual void HandleJump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
-        {
-            _rigidbody.AddForce(Vector2.up * statHandler.JumpForece);
-            
-        }
-    }
 
     // 상호작용 이벤트들
 
