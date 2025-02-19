@@ -24,7 +24,7 @@ public class FollowCamera : MonoBehaviour
             return;
 
         Vector3 cameraPos = target.position;
-        cameraPos.z = target.transform.position.z;
+        cameraPos.z = target.transform.position.z + OffsetZ;
         transform.position = cameraPos;
     }
 }
