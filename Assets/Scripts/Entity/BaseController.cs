@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseController : MonoBehaviour
@@ -24,6 +25,8 @@ public class BaseController : MonoBehaviour
 
     protected JumpController jumpController;
 
+    protected UIManager uiManager;
+
     
     protected virtual void Awake()
     {
@@ -32,7 +35,9 @@ public class BaseController : MonoBehaviour
         statHandler = GetComponent<StatHandler>();
         jumpController = GetComponent<JumpController>();
 
-        
+        uiManager = FindObjectOfType<UIManager>();
+
+
     }
 
     protected virtual void Start()
@@ -55,6 +60,7 @@ public class BaseController : MonoBehaviour
     {
         Movement(movementDirection);
     }
+
 
 
     protected virtual void HandleAction()

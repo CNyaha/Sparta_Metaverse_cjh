@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &93682812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -226,6 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa15905911685664a8835e609bcbe01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flapyUI: {fileID: 0}
+  currentState: 0
+  uiManager: {fileID: 0}
 --- !u!114 &102628169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +303,7 @@ GameObject:
   - component: {fileID: 146396995}
   m_Layer: 0
   m_Name: Interection
-  m_TagString: Untagged
+  m_TagString: Interaction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

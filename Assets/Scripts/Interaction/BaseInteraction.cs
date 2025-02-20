@@ -24,6 +24,7 @@ public abstract class BaseInteraction : MonoBehaviour
 
     public abstract void Interface(); // 각 방을 구현할 메서드
 
+
     public void SetActive(InteractionState state)
     {
         this.gameObject.SetActive(GetInteractionState() == state);

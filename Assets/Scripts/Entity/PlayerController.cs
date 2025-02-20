@@ -43,6 +43,15 @@ public class PlayerController : BaseController
             jumpController?.Jump();
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interactoion") && Input.GetKeyDown(KeyCode.F))
+        {
+            // 우선은 인터렉션이 한개이므로 Minigame으로 실행되게끔 설정
+            uiManager.ChageInteraction(InteractionState.Minigame);
+        }
+    }
+
     protected override void OnInteract()
     {
         Debug.Log("플레이어 상호작용!");

@@ -28,6 +28,11 @@ public class FlapyUI : MinigameUI
 
     }
 
+    protected override MinigameState GetMinigameState()
+    {
+        return MinigameState.Flapy;
+    }
+
     
 
 }

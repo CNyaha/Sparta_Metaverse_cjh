@@ -94,6 +94,7 @@ public class JumpController : MonoBehaviour
 
     }
 
+    // 점프가 상승중일 때는 + 값 하강중일때는 - 값을 리턴
     public float CurrentJump()
     {
         if (jumpYNum == 1)

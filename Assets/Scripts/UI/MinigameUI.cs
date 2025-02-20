@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinigameUI : MonoBehaviour
+public abstract class MinigameUI : MonoBehaviour
 {
     FlapyUI flapyUI;
 
     MinigameState currentState;
 
     protected UIManager uiManager;
+
 
     public virtual void Init(UIManager uIManager)
     {
@@ -32,5 +33,6 @@ public class MinigameUI : MonoBehaviour
     {
         currentState = state;
     }
+    protected abstract MinigameState GetMinigameState();
 
 }
