@@ -6,14 +6,13 @@ using UnityEngine;
 
 public enum MinigameState
 {
-    Null,
-    Dungeon,
-    TheStack
+    Home,
+    Flapy
 }
 
 public enum InteractionState
 {
-    Null,
+    Home,
     Minigame
 }
 
@@ -24,6 +23,8 @@ public class UIManager : MonoBehaviour
 
     private InteractionState itState;
     private MinigameState mgState;
+
+    private FlapyUI flapyUI;
 
 
 
@@ -37,6 +38,8 @@ public class UIManager : MonoBehaviour
         }
         minigaRoomInteraction.Init(this);
 
+        flapyUI = GetComponentInChildren<FlapyUI>(true);
+        flapyUI.Init(this);
 
     }
 
