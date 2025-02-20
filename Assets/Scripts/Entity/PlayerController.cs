@@ -6,13 +6,11 @@ public class PlayerController : BaseController
 {
     // Ä«¸Þ¶ó
     private Camera mainCamera;
-    JumpController jumpController;
 
     protected override void Awake()
     {
         base.Awake();
         mainCamera = Camera.main;
-        jumpController = GetComponent<JumpController>();
     }
 
     protected override void HandleAction()
@@ -42,7 +40,7 @@ public class PlayerController : BaseController
     {
         base.FixedUpdate();
         if (Input.GetKeyDown(KeyCode.Space))
-            jumpController.Jump();
+            jumpController?.Jump();
     }
 
     protected override void OnInteract()

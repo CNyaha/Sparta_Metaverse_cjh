@@ -20,6 +20,11 @@ public class StatHandler : MonoBehaviour
         set => speed = Mathf.Clamp(value, 0f, 20f);
     }
 
+    public int gold = 0;
+
+    public float posX = 0;
+    public float posY = 0;
+
 
 
 

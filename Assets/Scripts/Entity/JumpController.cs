@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
+    // 점프 중 이동할 수 있게 끔 구현. 그러려면 일단 점프하는 y축을 점프 상승중일땐 y+ 하강중일 땐 y-를 해보자
+
     [Header("Jump Setting")]
     [Range(1f, 5f)][SerializeField] private float jumpHeight = 1;
     public float JumpHeigt
@@ -29,7 +31,9 @@ public class JumpController : MonoBehaviour
     private int currentJumpCount = 0; //현재의 점프 횟수
     private Vector3 position;
     private Coroutine jumpCoroutine;
-    public float CurrentJumpOffset { get; private set; }
+    // 점프할 때 추가해줄 y값
+    public float CurrentJumpY { get; private set; } = 0f;
+    public int jumpYNum = 0;
 
 
     private void Awake()
@@ -60,39 +64,50 @@ public class JumpController : MonoBehaviour
         float halfDuration = jumpDuration / 2f;
         float jumpProgress = 0f;
 
+
         // 상승
         while (jumpProgress < halfDuration)
         {
+            jumpYNum = 1;
             jumpProgress += Time.deltaTime;
             float t = jumpProgress / halfDuration;
             // 부드러운 곡선을 구현
-            float offSet = Mathf.Lerp(0, jumpHeight, Mathf.SmoothStep(0, 1, t));
-            SetJumpOffset(offSet);
+            CurrentJumpY = Mathf.Lerp(0, JumpHeigt, Mathf.SmoothStep(0, 1, t));
             yield return null;
         }
         // 하강
         jumpProgress = 0f;
         while (jumpProgress < halfDuration)
         {
+            jumpYNum = 2;
             jumpProgress += Time.deltaTime;
             float t = jumpProgress / halfDuration;
-            float offSet = Mathf.Lerp(jumpHeight, 0, Mathf.SmoothStep(0, 1, t));
-            SetJumpOffset(offSet);
+            CurrentJumpY = Mathf.Lerp(JumpHeigt, 0, Mathf.SmoothStep(0, 1, t));
+            
             yield return null;
         }
-
-        SetJumpOffset(0);
+        jumpYNum = 0;
+        CurrentJumpY = 0;
+        currentJumpCount = 0;
         jumpCoroutine = null;
 
 
     }
 
-    private void SetJumpOffset(float offset)
+    public float CurrentJump()
     {
-        Vector3 pos = position;
-        pos.y += offset;
-        transform.localPosition = pos;
+        if (jumpYNum == 1)
+        {
+            return CurrentJumpY;
+        }
+        else if (jumpYNum == 2)
+        {
+            return -CurrentJumpY;
+        }
+
+        return 0;
     }
+
 
     public void RestJumpCount()
     {

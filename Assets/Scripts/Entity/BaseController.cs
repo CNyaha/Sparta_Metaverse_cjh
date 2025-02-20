@@ -56,6 +56,7 @@ public class BaseController : MonoBehaviour
         Movement(movementDirection);
     }
 
+
     protected virtual void HandleAction()
     {
 
@@ -64,9 +65,10 @@ public class BaseController : MonoBehaviour
     // ¿Ãµø
     private void Movement(Vector2 direction)
     {
+        float jumpY = jumpController != null ? jumpController.CurrentJumpY : 0f;
         direction = direction * statHandler.Speed;
 
-        _rigidbody.velocity = direction;
+        _rigidbody.velocity = direction + new Vector2(0, jumpController.CurrentJump());
     }
 
     private void Rotate(Vector2 dirction)
